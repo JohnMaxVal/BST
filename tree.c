@@ -19,23 +19,6 @@ register_tree_key_matchFn(Tree* tree, int (*key_matchFn)(void*, void*)) {
 }
 
 void
-inorder_tree_walk(Tree* tree) {
-  TreeNode* root = NULL;
-
-  if(!tree) return;
-
-  recursive_walk(tree->root);
-}
-
-static void
-recursive_walk(TreeNode* root) {
-  if(root != NULL) {
-    recursive_walk(root->left);
-    recursive_walk(root->right);
-  }
-}
-
-void
 tree_insert(Tree* tree, void* data) {
   if(tree == NULL || data == NULL)
     return;
@@ -86,3 +69,31 @@ tree_search(Tree* tree, void* key) {
 
   return node;
 }
+
+TreeNode*
+tree_min(Tree* tree) {
+  if(tree == NULL || tree->root == NULL)
+    return NULL;
+  
+  TreeNode* node = tree->root;
+
+  while(node->left != NULL)
+    node = node->left;
+
+  return node;
+}
+
+TreeNode*
+tree_max(Tree* tree) {
+  if(tree == NULL || tree->root == NULL)
+    return NULL;
+
+  TreeNode* node = tree->root;
+
+  while(node->right != NULL)
+    node = node->right;
+
+  return node;
+}
+
+

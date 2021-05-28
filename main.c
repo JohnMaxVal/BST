@@ -69,14 +69,30 @@ int main(int argc, char **argv) {
   tree_insert(tree, p7);
   tree_insert(tree, p2);
   
-  //inorder_walk2(tree->root);
-  register_tree_key_matchFn(tree, person_key_match);
-  TreeNode* search1 = tree_search(tree,(void*) 7);
+  /* inorder_walk2(tree->root); */
+  /* printf("\n\n"); */
+  /* register_tree_key_matchFn(tree, person_key_match); */
+  /* TreeNode* search1 = tree_search(tree,(void*) 7); */
 
-  Person* searchp1 = (Person*)search1->data;
+  /* Person* searchp1 = (Person*)search1->data; */
+  /* printf("Node: %p Parent: %p Left: %p Right: %p\nId: %d\n\n", */
+  /* 	 search1, search1->parent, search1->left, search1->right, searchp1->id); */
+
+  //Tree* tmp = tree;
+  
+  printf("Tree min:\n");
+  TreeNode* min = tree_min(tree);
+  Person* min_p = (Person*)min->data;
   printf("Node: %p Parent: %p Left: %p Right: %p\nId: %d\n\n",
-	 search1, search1->parent, search1->left, search1->right, searchp1->id);
+	 min, min->parent, min->left, min->right, min_p->id);
 
+  printf("Tree max:\n");
+  TreeNode* max = tree_max(tree);
+  Person* max_p = (Person*)max->data;
+  printf("Node: %p Parent: %p Left: %p Right: %p\nId: %d\n\n",
+	 max, max->parent, max->left, max->right, max_p->id);
+
+  
   return 0;
 }
 

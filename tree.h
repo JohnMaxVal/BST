@@ -14,9 +14,6 @@ typedef struct _tree {
   int (*key_match)(void*, void*);
 } Tree;
 
-static void
-recursive_walk(TreeNode* root);
-
 static TreeNode*
 malloc_tree_node(void);
 
@@ -38,7 +35,10 @@ inorder_tree_walk(Tree* tree);
 TreeNode*
 tree_search(Tree* tree, void* key);
 
-/* TreeNode* */
-/* recursive_tree_search(TreeNode* root, int key); */
+TreeNode*
+tree_min(Tree* tree);
+
+TreeNode*
+tree_max(Tree* tree);
 
 #endif
