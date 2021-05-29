@@ -70,30 +70,97 @@ tree_search(Tree* tree, void* key) {
   return node;
 }
 
-TreeNode*
-tree_min(Tree* tree) {
-  if(tree == NULL || tree->root == NULL)
-    return NULL;
+/* TreeNode* */
+/* tree_min(Tree* tree) { */
+/*   if(tree == NULL || tree->root == NULL) */
+/*     return NULL; */
   
-  TreeNode* node = tree->root;
+/*   TreeNode* node = tree->root; */
 
-  while(node->left != NULL)
-    node = node->left;
+/*   while(node->left != NULL) */
+/*     node = node->left; */
 
-  return node;
-}
+/*   return node; */
+/* } */
 
 TreeNode*
-tree_max(Tree* tree) {
-  if(tree == NULL || tree->root == NULL)
-    return NULL;
-
-  TreeNode* node = tree->root;
-
+tree_min(TreeNode* node) {
   while(node->right != NULL)
     node = node->right;
-
   return node;
 }
 
+TreeNode*
+tree_max(TreeNode* node) {
+  while(node->left != NULL)
+    node = node->left;
+  return node;
+}
+
+/* TreeNode* */
+/* tree_max(Tree* tree) { */
+/*   if(tree == NULL || tree->root == NULL) */
+/*     return NULL; */
+
+/*   TreeNode* node = tree->root; */
+
+/*   while(node->right != NULL) */
+/*     node = node->right; */
+
+/*   return node; */
+/* } */
+
+void
+tree_delete(Tree* tree, void* data) {
+  TreeNode* node = tree_search(tree, data);
+
+  TreeNode* tmp = NULL;
+  
+  if(node->left == NULL || node->right == NULL)
+    tmp = node;
+  else
+    tmp = tree_successor(node);
+
+  TreeNode* tmp2 = NULL;
+  
+  if(tmp->left != NULL)
+    tmp2 = tmp->left;
+  else
+    tmp2 = tmp->right;
+
+  if(tmp2 != NULL)
+    tmp2->parent = tmp->parent;
+  
+  if(tmp->parent == NULL)
+    tree->root = tmp2;
+  else {
+    if(tmp == tmp->parent->left)
+       tmp->parent->left = tmp2;
+    else
+      tmp->parent->right = tmp2;
+  }
+
+  if(tmp != node) 
+    node->data = tmp->data;
+
+  free(tmp);
+}
+
+TreeNode*
+tree_successor(TreeNode* node) {
+  if(node == NULL)
+    return NULL;
+  
+  if(node->right != NULL)
+    return tree_min(node->right);
+
+  TreeNode* parent = node->parent;
+
+  while(parent != NULL && node == parent->right) {
+    node = parent;
+    parent = parent->parent;
+  }
+
+  return parent;
+}
 

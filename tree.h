@@ -35,10 +35,22 @@ inorder_tree_walk(Tree* tree);
 TreeNode*
 tree_search(Tree* tree, void* key);
 
-TreeNode*
-tree_min(Tree* tree);
+/* TreeNode* */
+/* tree_min(Tree* tree); */
 
 TreeNode*
-tree_max(Tree* tree);
+tree_min(TreeNode* node);
+
+/* TreeNode* */
+/* tree_max(Tree* tree); */
+
+TreeNode*
+tree_max(TreeNode* node);
+
+TreeNode*
+tree_successor(TreeNode* tree); // get next node in sorted order
+
+void
+tree_delete(Tree* tree, void *data);
 
 #endif
